@@ -1,0 +1,26 @@
+rules:
+  - id: sql-injection-java
+    patterns:
+      - pattern: |
+          String $QUERY = "..." + $INPUT + "...";
+      - pattern: |
+          $STMT.executeQuery($QUERY)
+    message: SQL injection vulnerability detected
+    languages: [java]
+    severity: ERROR
+
+  - id: sql-injection-python
+    patterns:
+      - pattern: |
+          $CURSOR.execute(f"...{$INPUT}...")
+    message: SQL injection in Python
+    languages: [python]
+    severity: ERROR
+
+  - id: sql-injection-js
+    patterns:
+      - pattern: |
+          $DB.query(`...${$INPUT}...`)
+    message: SQL injection in JavaScript
+    languages: [javascript]
+    severity: ERROR
